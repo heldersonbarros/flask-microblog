@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include '_post.html' %}
+    <div class="mt-5" id="comments">
+        <h3 class="my-2">Comentários</h3>
+        <div class="row">
+            <div class="col-md-1">
+                {% if current_user.is_anonymous %}
+                    <img src="{{ url_for('static', filename='img/anonymous_user.jpg')}}" class="rounded-circle" alt="Erro em carregar imagem" style="padding: 4px;" height="70px" width="70px">
+                {% else %}
+                    <img src="{{url_for('avatars_profile', user_id=current_user.id)}}" class="rounded-circle" alt="Erro em carregar imagem" style="padding: 4px;" height="70px" width="70px">
+                {% endif %}
+            </div>
+            <div class="card col-md-11 p-0 mt-2">
+                <form action="" method="POST" novalidate>
+                    {{form.hidden_tag()}}
+                    <div class="form-group p-0 m-0">
+                        {{form.text(class="form-control d-inline-flex", placeholder="Escreva seu comentário...", rows='3')}}<br>
+                    {{form.submit(class="btn btn-danger float-right mr-3 my-3")}}
+                    </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+    {% for comment in highlights_comments %}
+    <table id="comment{{comment.id}}" class="m-0 p-0">
+    <tr valign="top">
+        <td>
+            <div class="">
+                <div class="mr-3" style="display: inline-block; float: left">
+                    <img src="{{url_for('avatars_profile', user_id=comment.author.id)}}" class="rounded-circle" alt="Erro em carregar imagem" style="padding: 4px;" height="70px" width="70px">
+                </div>
+                <div class="" style="display: inline-block">
+                    <span class="user_popover">
+                        <a href="{{ url_for('user', username=comment.author.username) }}"
+                        class="text-danger">
+                            <i class="fas fa-fire"></i>
+                            {{ comment.author.username }}</a>
+                    </span>
+                        ° <span class="text-muted"> {{moment(comment.timestamp).fromNow()}}</span>
+                    <br>
+                    {{comment.text}}<br>
+                    {% if comment.id in likeComment_id%}
+                    <button type="button" class="btn btn-danger mt-2 p-1 arribaCommentButton" comment_id= "{{comment.id}}",
+                    id="arribaComment{{comment.id}}">
+                        <i class="fas fa-smile"></i>
+                        <span>{{comment.arribas.count()}}</span>
+                    </button>
+
+                    {% else %}
+                    <button type="button" class="btn btn-secondary mt-2 p-1 arribaCommentButton" comment_id= "{{comment.id}}",
+                    id="arribaComment{{comment.id}}">
+                        <i class="far fa-smile"></i>
+                        <span>{{comment.arribas.count()}}</span>
+                    </button>
+                    {% endif %}
+                    
+
+                    <span class="text-muted ml-2">responder</span>
+                </div>
+                <br>
+            </div>
+        </td>
+    </tr>
+    <hr>
+</table>
+{% endfor %}   
+
+<hr>
+
+	{% for comment in comments %}
+        <div class="">
+            <div class="mr-3" style="display: inline-block; float: left">
+                <img src="{{url_for('avatars_profile', user_id=comment.author.id)}}" class="rounded-circle" alt="Erro em carregar imagem" style="padding: 4px;" height="70px" width="70px">
+            
+            </div>
+                <div class="" style="display: inline-block">
+                    <span class="user_popover">
+                        <a href="{{ url_for('user', username=comment.author.username) }}"
+                         class="text-danger">
+                            {{ comment.author.username }}</a>
+                    </span>
+                    ° <span class="text-muted"> {{moment(comment.timestamp).fromNow()}}</span>
+                    <br>
+                    {{comment.text}}<br>
+                    {% if comment.id in likeComment_id%}
+                    <button type="button" class="btn btn-danger mt-2 p-1 arribaCommentButton" comment_id= "{{comment.id}}",
+                        id="arribaComment{{comment.id}}">
+                        <i class="fas fa-smile"></i>
+                        <span>{{comment.arribas.count()}}</span>
+                    </button>
+
+                    {% else %}
+                    <button type="button" class="btn btn-secondary mt-2 p-1 arribaCommentButton" comment_id= "{{comment.id}}",
+                        id="arribaComment{{comment.id}}">
+                        <i class="far fa-smile"></i>
+                        <span>{{comment.arribas.count()}}</span>
+                    </button>
+                    {% endif %}
+                    <span class="text-muted ml-2">responder</span>
+                </div>
+                    <br>
+            </div>
+        <hr>
+    </table>
+    {% endfor %}
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="{{url_for('static', filename='arriba_comment.js')}}"></script>
+    
+{% endblock %}

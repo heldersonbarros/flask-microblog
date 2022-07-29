@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="list-group">
+    {% for notification in notifications %}
+    <a href="{{url_for('post', id=notification.get_data()['post_id'])}}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+            <div>
+                <img src="{{url_for('avatars_profile', user_id=notification.get_data()['user_id']['photo_id'])}}" class="rounded-circle " alt="Erro em carregar imagem" height="50px" width="50px">
+            </div>
+    {% if notification.type == 'liked_post' %}
+        <div class="col-md-10 mt-2">
+            <b>{{ notification.get_data()['user_id']['name'] }}</b> ° <span class="text-muted">{{moment(notification.timestamp_datetime).calendar()}}</span>
+            <br>
+            curtiu seu meme<br>
+        </div>
+    {% elif notification.type == 'comment_post' %}
+    <div class="col-md-10 mt-2">
+        <b>{{ notification.get_data()['user_id']['name'] }}</b> ° <span class="text-muted">{{moment(notification.timestamp_datetime).calendar()}}</span>
+        <br>
+        comentou seu meme<br>
+    </div>
+    {% elif notification.type == 'mention_post' %}
+     <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><b>{{notification.get_data()['user_id']}}</b> mencionou você em um meme</h5>
+      <small>{{moment(notification.timestamp_datetime).calendar()}}</small>
+    </div>
+    {% endif %}
+    <br>
+    <p class="mb-1"></p>
+    <small>
+        <img src="{{url_for('uploads', post_id=notification.get_data()['post_id'])}}" alt="Erro em carregar imagem" height="50px">
+    </small>
+    </div>
+    </a>
+ 	{% endfor %}
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#' }}">
+                    <span aria-hidden="true">&larr;</span> Anterior
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#' }}">
+                    Próximo  <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}

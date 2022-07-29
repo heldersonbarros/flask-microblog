@@ -1,0 +1,40 @@
+<h1 style="font-size:larger ;"><a class="text-dark" href="{{ url_for('post', id=post.id) }}">{{post.title}}</a></h1><br>
+<a href="{{url_for('post', id=post.id)}}"><img src="{{ url_for('uploads', post_id=post.id)}}" alt="Imagem não encontrada" 
+    style="max-width:600px;width:100%"></a><br>
+
+<div class="mt-1 mb-3">
+<span class="user_popover">
+    <a class="text-danger" href="{{ url_for('user', username=post.author.username) }}">
+        {{ post.author.username }}
+    </a>
+</span>
+ ° {{moment(post.timestamp).calendar()}}
+<br>
+</div>
+    {% if current_user.is_anonymous %}
+        <button type="button" class="btn btn-secondary arribaButton" post_id = {{post.id}} id="arriba{{post.id}}">
+                <i class="far fa-smile fa-lg" aria-hidden="true"></i>
+                    {{post.arribas.count()}}
+        </button>
+    {% else %}
+        {% if post.id in liked_id %}
+        <button type="button" class="btn btn-danger arribaButton mr-1" post_id = {{post.id}} id="arriba{{post.id}}">
+            <i class="fas fa-smile fa-lg arribaIcon active" aria-hidden="true"></i>
+                    <span>{{post.arribas.count()}}</span>
+                {% else %}
+                <button type="button" class="btn btn-secondary arribaButton mr-1" post_id = {{post.id}} id="arriba{{post.id}}">
+                    <i class="far fa-smile fa-lg arribaIcon" aria-hidden="true"></i>
+                    <span>{{post.arribas.count()}}</span>
+                </button>
+                {% endif %}
+                {% endif %}
+                <button type="button" class="btn btn-secondary mr-1">
+                    <i class="far fa-frown fa-lg"></i> 0
+                </button>
+
+                <a href="{{url_for('post', id=post.id)}}#comments">
+                <button type="button" class="btn btn-light border bg-white rounded">
+                    <i class="fa fa-comment fa-lg" aria-hidden="true"></i>
+                    {{post.comments.count()}} Comentários
+                </button>
+            </a>

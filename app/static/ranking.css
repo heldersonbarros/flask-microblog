@@ -1,0 +1,52 @@
+*{
+    box-sizing: border-box;
+}
+.member{
+    display: inline-block;
+    width: 22%;
+    height: 200px;
+    border: 1px solid gray;
+    margin: 5px;
+}
+
+.member:before {
+    display: inline-block;
+    content: counter(item) ") ";
+    counter-increment: item;
+    width: 2em;
+    margin-left: -2em;
+  }
+
+.img{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.member-group{
+    margin: 0;
+    padding: 0;
+    counter-reset: item;
+}
+
+.member-group li::before {
+    counter-increment: step-counter;
+    content: counter(step-counter);
+  }
+
+.member-content{
+    display: block;
+    text-align: center;
+    font-size: 15px;
+}
+
+.member-name{
+    text-decoration: none;
+    color: black;
+    font-size: 19px;
+}
+
+.member-since{
+    color: gray;
+    padding-top: 1px;
+}

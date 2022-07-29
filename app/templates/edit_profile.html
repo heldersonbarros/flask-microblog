@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-md-4 offset-md-4 shadow-lg p-3 mb-5 bg-white rounded">
+	<div class="mb-3">
+		<h1 class="text-center">Editar Perfil</h1>
+		<hr>
+	</div>
+
+	<form action="" method="POST" enctype="multipart/form-data" novalidate>
+	  {{form.hidden_tag()}}
+	  <div>
+		<img src="{{url_for('avatars_profile', user_id=current_user.id)}}" class="rounded-circle" alt="Erro em carregar imagem" style="display: block;height: auto;max-width: 40%;margin:0 auto;" height="150px">
+	  </div>
+	  <div class="form-group mt-3">
+		<div class="custom-file">
+		{{ form.avatar(class="custom-file-input", id="avatar") }}
+		<label class="custom-file-label" for="avatar">Escolha imagem...</label>
+		</div>
+		{% for error in form.avatar.errors %}
+		<div class="alert alert-danger" role="alert">{{error}}</div>
+		{% endfor %}
+	</div>
+	<div class="form-group">
+	    <label for="exampleInputEmail1">Nome de Usuário</label>
+	    {{ form.username(class="form-control", id="exampleInputEmail1", placeholder="Usuário") }}
+	   	{% for error in form.username.errors %}
+	    	<div class="alert alert-danger" role="alert">{{error}}</div>
+		{% endfor %}
+	  </div>
+	  {{form.submit(class="btn btn-danger w-100")}}
+	</form>
+</div>
+{% endblock %}

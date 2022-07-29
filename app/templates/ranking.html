@@ -1,0 +1,104 @@
+{% include 'base.html' %}
+
+{% block content %}
+
+	<div class="container">
+	<h1 class="mb-2">Usuários com maior pontuação</h1>
+	<hr>
+	<div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+		{% if order=='hoje' %}
+        <label class="btn btn-danger active">
+            <input type="radio" name="options" id="option1" autocomplete="off" order="hoje" checked> Hoje
+		</label>
+		{% else %}
+		<label class="btn btn-light">
+            <input type="radio" name="options" id="option1" autocomplete="off" order="hoje"> Hoje
+		</label>
+		{% endif %}
+
+		{% if order=='semana' %}
+        <label class="btn btn-danger active">
+            <input type="radio" name="options" id="option2" autocomplete="off" order="semana" checked> Semana
+		</label>
+		{% else %}
+        <label class="btn btn-light">
+            <input type="radio" name="options" id="option2" autocomplete="off" order="semana"> Semana
+		</label>
+		{% endif %}
+
+		{% if order=='mes' %}
+		<label class="btn btn-danger active">
+            <input type="radio" name="options" id="option3" autocomplete="off" order="mes" checked> Mês
+		</label>
+		{% else %}
+        <label class="btn btn-light">
+            <input type="radio" name="options" id="option3" autocomplete="off" order="mes"> Mês
+		</label>
+		{% endif %}
+
+		{% if order=='sempre' %}
+        <label class="btn btn-danger active">
+            <input type="radio" name="options" id="option3" autocomplete="off" order="sempre" checked> Sempre
+		</label>
+		{% else %}
+        <label class="btn btn-light">
+            <input type="radio" name="options" id="option3" autocomplete="off" order="sempre"> Sempre
+		</label>
+		
+		{% endif %}
+	</div>
+	
+	<ol class="row pl-3 w-100">
+	{% set count = {'value': 1} %}
+	{% for user in users %}
+	
+	<li class="card col-md-3 p-1 m-0">
+		<b class="mx-1 my-2">
+			<span class="badge badge-pill badge-danger d-inline-block">{{count.value}}</span>
+		</b>
+		<img src="{{url_for('avatars_profile', user_id=user.id)}}" class="rounded-circle img" alt="Erro em carregar imagem" height="80px" width="80px">
+		<div class="member-content">
+			<span class="user_popover">
+				<a class="member-name" href="{{ url_for('user', username = user.username)}}">{{user.username}}</a>
+			</span>
+		</div>
+		<div class="member-since member-content">
+			Membro {{moment(user.since).fromNow()}}
+		</div>
+		<hr>
+		<div class="member-content mb-3">
+			{% if user.points.count() != 1 %}
+			<b>{{user.points.count()}} pontos</b>
+			{% else %}
+			<b>{{user.points.count()}} ponto</b>
+			{% endif %}
+		</div>
+
+		<hr>
+
+		<div class="row w-100 m-0 mb-2">
+			<div class="col-md-4 text-center m-0">
+				<b>{{types[(count.value) - 1].today}}</b><br>
+				<span class="text-muted">Hoje</span>
+			</div>
+			<div class="col-md-4 text-center m-0">
+				<b>{{types[(count.value) - 1].week}}</b><br>
+				<span class="text-muted">Semana</span>
+			</div>
+			<div class="col-md-4 text-center m-0 p-0">
+				<b>{{types[(count.value) - 1].month}}</b><br>
+				<span class="text-muted">Mês</span>
+			</div>
+		</div>
+	</li>
+	{% if count.update({'value': count.value + 1}) %} {% endif %}
+	{% endfor %}
+	</ol>
+	</div>
+	</div>
+	<a href="" class="btn btn-danger my-3 px-1 col-md-4 offset-md-4">Ver próximos <i class="fas fa-arrow-right"></i></a>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='ranking.css') }}">
+	<script src="{{url_for('static', filename='btn_group.js')}}"></script>
+
+{% endblock %}

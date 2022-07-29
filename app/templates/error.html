@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-md-4 offset-md-4 p-3 mb-5 bg-white rounded text-center">
+        <span style="font-size: 100px">{{error_type}}<br></span>
+        <span><b>Oooops!!</b><br>{{message}}</span>
+        <a href="{{url_for('index')}}" class="btn btn-danger mt-4">Voltar para página inicial</a>
+    </div>
+{% endblock %}

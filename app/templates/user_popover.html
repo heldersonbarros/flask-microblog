@@ -1,0 +1,12 @@
+<div class="w-100 m-0 py-2 px-4 ">
+	<img src="{{url_for("avatars_profile", user_id=user.id)}}" class="rounded-circle mb-2" alt="Erro em carregar imagem" height="40px">
+	<h5><b><a class="text-dark" href="{{ url_for('user', username=user.username) }}">{{user.username}}</a></b></h5>
+	<hr>
+	<div class="d-block mt-2">
+		<h6 class="text-danger"><span class="text-danger">{{user.posts.count()}}&nbsp;</span><span class="text-muted">Posts</span></h6>
+	</div>
+
+	<div class="d-block">
+		<h6 class="text-danger"><span class="text-danger">{{user.comments.count()}}&nbsp;</span><span class="text-muted">Comentários</span></h6>
+	</div>
+</div>
