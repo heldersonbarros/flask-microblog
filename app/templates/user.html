@@ -5,7 +5,7 @@
 	<div class="card col-md-3 float-right px-0">
 		<div class="card-header bg-danger">
 		<div class="mx-3 justify-content-center d-flex">
-		<img src="{{url_for('avatars_profile', user_id=user.id)}}" class="rounded-circle" alt="Erro em carregar imagem" height="100px" weidth="80%">
+		<img src="{{url_for('core.avatars_profile', user_id=user.id)}}" class="rounded-circle" alt="Erro em carregar imagem" height="100px" weidth="80%">
 		</div>
 		<div class="justify-content-center d-flex my-3 text-white">
 			<h5>{{user.username}}</h5>
@@ -28,7 +28,7 @@
 
 		{% if current_user==user %}
 		<div class="card-footer w-100 bg-light text-center">
-			<a class="text-muted" href="{{url_for('edit_profile')}}"><i class="fas fa-edit"></i> Editar Perfil</a>
+			<a class="text-muted" href="{{url_for('core.edit_profile')}}"><i class="fas fa-edit"></i> Editar Perfil</a>
 		</div>
 		{% else %}
 		<div class="card-footer w-100 bg-light text-center">
@@ -85,6 +85,7 @@
 		{% include '_post.html' %}
 	{% endfor %}
 
-	<script src="{{url_for('static', filename='btn_group.js')}}"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="{{url_for('static', filename='js/btn_group.js')}}"></script>
 	
 {% endblock %}

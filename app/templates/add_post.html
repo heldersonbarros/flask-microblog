@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	<div class="col-md-4 offset-md-4">
+	<div class="col-md-4 offset-md-4 shadow-lg p-3 mb-5 bg-white rounded">
 	<h1>Criar post</h1> 
 	<form action="" method="POST" enctype="multipart/form-data" novalidate>
 		{{form.hidden_tag()}}
@@ -29,7 +29,7 @@
 			<div class="alert alert-danger" role="alert">{{error}}</div>
 			{% endfor %}
 		</div>
-		{{form.submit(class="btn btn-primary")}}
+		{{form.submit(class="btn btn-danger w-100")}}
 	</form>
 	</div>
 {% endblock %}

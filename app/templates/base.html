@@ -5,14 +5,12 @@
 		{% else %}
 		<title>My site</title>
 		{% endif %}
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-		<script src="{{ url_for('static', filename='css/fontawesome/js/all.js')}}" rel="stylesheet"></script>
-		<link href="{{ url_for('static', filename='test.css')}}" rel="stylesheet"/>
-		<link rel="shortcut icon" href="{{ url_for('static', filename='img/fav_icon.jpg')}}" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+		<script src="{{ url_for('static', filename='js/fontawesome/all.js')}}" rel="stylesheet"></script>
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-danger px-5 pt-0 pb-0">
-		  <a class="navbar-brand text-white" href="{{url_for('index')}}">My site</a>
+		  <a class="navbar-brand text-white" href="{{url_for('core.index')}}">My site</a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
 		    <span class="navbar-toggler-icon"></span>
 		  </button>
@@ -21,52 +19,52 @@
 		    <ul class="navbar-nav mr-auto">
 			  {% if title == 'Trending' %}
 		      <li class="nav-item">
-		        <a class="nav-link btn btn-danger text-white py-3 active" href="{{url_for('index')}}">Trending <span class="sr-only">(current)</span></a>
+		        <a class="nav-link btn btn-danger text-white py-3 active" href="{{url_for('core.index')}}">Trending <span class="sr-only">(current)</span></a>
 			  </li>
 			  {% else %}
 			  <li class="nav-item">
-		        <a class="nav-link btn btn-danger text-white py-3" href="{{url_for('index')}}">Trending <span class="sr-only">(current)</span></a>
+		        <a class="nav-link btn btn-danger text-white py-3" href="{{url_for('core.index')}}">Trending <span class="sr-only">(current)</span></a>
 			  </li>
 			  {% endif %}
 			  {% if title == 'Últimas' %}
 		      <li class="nav-item">
-		        <a class="nav-link btn btn-danger text-white py-3 active" href="{{url_for('new_posts')}}">Últimas</a>
+		        <a class="nav-link btn btn-danger text-white py-3 active" href="{{url_for('core.new_posts')}}">Últimas</a>
 			  </li>
 			  {% else %}
 		      <li class="nav-item">
-		        <a class="nav-link btn btn-danger text-white py-3" href="{{url_for('new_posts')}}">Últimas</a>
+		        <a class="nav-link btn btn-danger text-white py-3" href="{{url_for('core.new_posts')}}">Últimas</a>
 			  </li>
 			  {% endif %}
 			  {% if title == 'Tops' %}	  
 		      <li class="nav-item">
-		        <a class="nav-link btn btn-danger text-white py-3 active" href="{{url_for('tops')}}">Tops</a>
+		        <a class="nav-link btn btn-danger text-white py-3 active" href="{{url_for('core.tops')}}">Tops</a>
 			  </li>
 			  {% else %}
 			  <li class="nav-item">
-		        <a class="nav-link btn btn-danger text-white py-3" href="{{url_for('tops')}}">Tops</a>
+		        <a class="nav-link btn btn-danger text-white py-3" href="{{url_for('core.tops')}}">Tops</a>
 			  </li>
 			  {% endif %}
 		    </ul>
 		    <ul class="nav navbar-nav navbar-right d-flex">
 				<li class="nav-item">
 					{% if title=='Ranking' %}
-					<a class="nav-link btn btn-danger text-white py-3 active" href="{{url_for('ranking')}}"><i class="fas fa-trophy"></i> Ranking</a>
+					<a class="nav-link btn btn-danger text-white py-3 active" href="{{url_for('core.ranking')}}"><i class="fas fa-trophy"></i> Ranking</a>
 					{% else %}
-					<a class="nav-link btn btn-danger text-white py-3" href="{{url_for('ranking')}}"><i class="fas fa-trophy"></i> Ranking</a>
+					<a class="nav-link btn btn-danger text-white py-3" href="{{url_for('core.ranking')}}"><i class="fas fa-trophy"></i> Ranking</a>
 					{% endif %}
 				</li>
                 {% if current_user.is_anonymous %}
-					<li class="nav-item"><a class="nav-link btn btn-danger text-white py-3" href="{{url_for('login')}}"><i class="fas fa-plus"></i> Criar post</a></li>
+					<li class="nav-item"><a class="nav-link btn btn-danger text-white py-3" href="{{url_for('auth.login')}}"><i class="fas fa-plus"></i> Criar post</a></li>
 					<li class="nav-item">
 						{% if title=='Login' %}
-						<a class="nav-link btn btn-danger text-white py-3 active" href="{{url_for('login')}}">Entrar</a>
+						<a class="nav-link btn btn-danger text-white py-3 active" href="{{url_for('auth.login')}}">Entrar</a>
 						{% else %}
-						<a class="nav-link btn btn-danger text-white py-3" href="{{url_for('login')}}">Entrar</a>
+						<a class="nav-link btn btn-danger text-white py-3" href="{{url_for('auth.login')}}">Entrar</a>
 						{% endif %}
 					</li>
 				{% else %}
 					<li class="nav-item">
-							<a class="nav-link text-white py-3" href="{{url_for('my_notifications')}}"><i class="fa fa-bell"></i>&nbsp;
+							<a class="nav-link text-white py-3" href="{{url_for('core.my_notifications')}}"><i class="fa fa-bell"></i>&nbsp;
 								{% set new_messages = current_user.new_messages() %}
 								{% if new_messages %}
 								<span id="message_count" class="badge" style="visibility: {% if new_messages %} visible {% else %} hidden {% endif %}">{{new_messages}}</span>
@@ -74,101 +72,38 @@
 							</a>
 					</li>
 
-					<!--
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle text-white py-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						  Minha conta
-						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						  <a class="dropdown-item" href="{{ url_for('user', username=current_user.username) }}">Meu perfil</a>
-						  <a class="dropdown-item" style="cursor: pointer" data-toggle="modal" data-target="#myModal">Criar post</a>
-						  <a class="dropdown-item" href="#">Configurações</a>
-						  <a class="dropdown-item" href="{{ url_for('my_arribas') }}">Arribas</a>
-						  <a class="dropdown-item" href="{{ url_for('my_comments') }}">Comentários</a>
-						  <div class="dropdown-divider"></div>
-						  <a class="dropdown-item" href="{{ url_for('logout') }}">Sair</a>
-						</div>
-					</li>
-					-->
-
 					<li class="nav-item">
 						<div class="profile_popover" data-content='
 						<div class="d-block ml-3 mr-3">
-							<div class="mt-2 ml-3">
-								<img src="{{url_for("avatars_profile", user_id=current_user.id)}}" class="rounded-circle"  alt="" height="50px" width="50px">&nbsp;
-								<a href="{{ url_for("user", username=current_user.username) }}" class="text-dark"><h5 class="d-inline-flex">{{current_user.username}}</h5></a>
-							</div>
-							<hr>
 							<div class="m-3">
-								<a href="" class="d-block text-dark"><h6><i class="fas fa-plus mr-3">&nbsp;</i><b>Criar post</b></h6></a>
+								<a href="{{ url_for("core.user", username=current_user.username) }}" class="d-block text-dark"><h6><i class="fas fa-user mr-3">&nbsp;</i><b>{{current_user.username}}</b></h6></a>
+							</div>
+							<div class="m-3">
+								<a href="{{ url_for("core.add_post") }}" class="d-block text-dark"><h6><i class="fas fa-plus mr-3">&nbsp;</i><b>Criar postagem</b></h6></a>
 							</div>
 							<div class="m-3">
 								<a href="" class="d-block text-dark"><h6><i class="fas fa-cog mr-3">&nbsp;</i><b>Configurações</b></h6></a>
 							</div>
 							<div class="m-3">
-								<a href="{{ url_for("my_arribas") }}" class="d-block text-dark"><h6><i class="fas fa-heart mr-3">&nbsp;</i><b>Arribas</b></h6></a>
+								<a href="{{ url_for("core.my_arribas") }}" class="d-block text-dark"><h6><i class="fas fa-heart mr-3">&nbsp;</i><b>Arribas</b></h6></a>
 							</div>
 							<div class="m-3">
-								<a href="{{ url_for("my_comments") }}" class="d-block text-dark"><h6><i class="fas fa-comments mr-3">&nbsp;</i><b>Comentários</b></h6></a>
+								<a href="{{ url_for("core.my_comments") }}" class="d-block text-dark"><h6><i class="fas fa-comments mr-3">&nbsp;</i><b>Comentários</b></h6></a>
 							</div>
 							<hr>
 							<div class="m-3">
-								<a href="{{ url_for("logout") }}" class="d-block text-dark"><h6><i class="fas fa-sign-out-alt mr-3">&nbsp;</i><b>Sair</b></h6></a>
+								<a href="{{ url_for("auth.logout") }}" class="d-block text-dark"><h6><i class="fas fa-sign-out-alt mr-3">&nbsp;</i><b>Sair</b></h6></a>
 							</div>
 						</div>
 						
 						'>
-							<a href="" class="nav-link py-3"><img src="{{url_for('avatars_profile', user_id=current_user.id)}}" class="rounded-circle"  alt="" height="30px" width="30px">&nbsp;</a>
+						<a href="" class="nav-link py-3"><img src="{{url_for('core.avatars_profile', user_id=current_user.id)}}" class="rounded-circle" alt="" height="30px" width="30px">&nbsp;</a>
 						</div>
 					</li>
             	{% endif %}
             </ul>
 		  </div>
 	</nav>
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-			  <div class="modal-content">
-				<div class="modal-header">
-				  <h5 class="modal-title" id="exampleModalLabel">Criar post</h5>
-				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				  </button>
-				</div>
-				<div class="modal-body">
-					<form action="" method="POST" enctype="multipart/form-data" novalidate>
-						{{postForm.hidden_tag()}}
-						<div class="form-group">
-						{{ postForm.title(class="form-control", id="title", placeholder="Título") }}
-						{% for error in postForm.title.errors %}
-						<div class="alert alert-danger" role="alert">{{error}}</div>
-						{% endfor %}
-						  </div>
-						  <div class="form-group">
-						{{ postForm.tag(class="form-control", id="tags", placeholder="Tags(Opcional)") }}
-						{% for error in postForm.tag.errors %}
-						<div class="alert alert-danger" role="alert">{{error}}</div>
-						{% endfor %}
-						</div>
-						<div class="form-group">
-							<div class="custom-file">
-							{{ postForm.image(class="custom-file-input", id="image") }}
-							<label class="custom-file-label" for="image">Escolha imagem...</label>
-							</div>
-							{% for error in postForm.image.errors %}
-							<div class="alert alert-danger" role="alert">{{error}}</div>
-							{% endfor %}
-						</div>
-					
-				</div>
-				<div class="modal-footer">
-				  <button type="button" class="btn btn-light" data-dismiss="modal">Fechar</button>
-				  {{postForm.submit(class="btn btn-danger")}}
-				</form>
-				</div>
-			  </div>
-			</div>
-		  </div>
-
 		  <div class="modal fade p-3" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg" role="document">
 			  <div class="modal-content">
@@ -179,41 +114,34 @@
 				  </button>
 				</div>
 				<div class="modal-body">
-					<form action="" method="POST" novalidate>
-						{{loginForm.hidden_tag()}}
+					<form action="{{url_for('auth.login')}}" method="POST" novalidate>
+						<input id="csrf_token" name="csrf_token" type="hidden" value="{{csrf_token()}}">
 						<div class="form-group">
-						  
-						  {{ loginForm.username(class="form-control mb-3", placeholder="Usuário") }}
-						  {% for error in loginForm.username.errors %}
-							  <div class="alert alert-danger" role="alert">{{error}}</div>
-						  {% endfor %}
+							<input class="form-control mb-3" id="username" name="username" placeholder="Usuário" required="" type="text" value="">
 						</div>
 						<div class="form-group">
-						  {{ loginForm.password(class="form-control", placeholder="Senha") }}
-							 {% for error in loginForm.password.errors %}
-							  <div class="alert alert-danger" role="alert">{{error}}</div>
-						  {% endfor %}
+							<input class="form-control" id="password" name="password" placeholder="Senha" required="" type="password" value="">
 						</div>
 						<div class="form-check ">
-						  {{loginForm.remember_me(class="form-check-input", id="remember_me")}}
-						  {{loginForm.remember_me.label(id="remember_me")}}
+							<input class="form-check-input" id="remember_me" name="remember_me" type="checkbox" value="y">
+							<label for="remember_me" id="remember_me">Mantenha-me conectado</label>
 						</div>
 				  
 						<div class="pt-5">
 						<p>
 						  Não possui conta?
-						  <a href="{{url_for('register')}}" class="text-danger">Criar nova conta</a><br>
+						  <a href="{{url_for('auth.register')}}" class="text-danger">Criar nova conta</a><br>
 						</p>
 						<p>
 							Esqueceu a senha?
-							<a href="{{url_for('reset_password_request')}}" class="text-danger">Clique para recuperar</a>
+							<a href="{{url_for('auth.reset_password_request')}}" class="text-danger">Clique para recuperar</a>
 						</p>
 						</div>
 					
 				</div>
 				<div class="modal-footer">
 				  <button type="button" class="btn btn-light" data-dismiss="modal">Fechar</button>
-				  {{loginForm.submit(class="btn btn-danger")}}
+				  <input class="btn btn-danger" id="submit" name="submit" type="submit" value="Entrar">
 				</form>
 				</div>
 			  </div>
@@ -240,7 +168,6 @@
 		</div>
 
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-		<script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		<script>
@@ -248,7 +175,7 @@
 				$(document).ready(function() {
 					var since = {{current_user.last_seen}};
 					setInterval(function() {
-						$.ajax("{{url_for('notification')}}?since="+since).done(function(notifications){
+						$.ajax("{{url_for('core.notification')}}?since="+since).done(function(notifications){
 						for (var i = 0; i<notifications.length; i++){
 							console.log(notifications[i].message_count)
 							set_message_count(notifications[i].message_count);
@@ -314,13 +241,15 @@
     			});
 			})
 
-
 			$(".arribaButton").on('click', function(){
 				{% if current_user.is_authenticated %}
 					var post_id = $(this).attr('post_id');
 
 					req = $.ajax({
 						url: '/arriba_post',
+						headers: {
+        					"X-CSRFToken": "{{csrf_token()}}",
+    					},
 						type: 'POST',
 						data: {post_id: post_id}
 					});
@@ -341,6 +270,10 @@
 					$('#loginModal').modal('show');
 				{% endif %}
 			});
+
+			$(".rounded-circle").on("error", function(){
+        		$(this).attr('src', '{{ url_for('static', filename='img/default_avatar.png')}}');
+    		});
 
 
 		</script>		

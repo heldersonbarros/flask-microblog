@@ -56,10 +56,10 @@
 		<b class="mx-1 my-2">
 			<span class="badge badge-pill badge-danger d-inline-block">{{count.value}}</span>
 		</b>
-		<img src="{{url_for('avatars_profile', user_id=user.id)}}" class="rounded-circle img" alt="Erro em carregar imagem" height="80px" width="80px">
+		<img src="{{url_for('core.avatars_profile', user_id=user.id)}}" class="rounded-circle img" alt="Erro em carregar imagem" height="80px" width="80px">
 		<div class="member-content">
 			<span class="user_popover">
-				<a class="member-name" href="{{ url_for('user', username = user.username)}}">{{user.username}}</a>
+				<a class="member-name" href="{{ url_for('core.user', username = user.username)}}">{{user.username}}</a>
 			</span>
 		</div>
 		<div class="member-since member-content">
@@ -98,7 +98,7 @@
 	</div>
 	<a href="" class="btn btn-danger my-3 px-1 col-md-4 offset-md-4">Ver próximos <i class="fas fa-arrow-right"></i></a>
 
-	<link rel="stylesheet" href="{{ url_for('static', filename='ranking.css') }}">
-	<script src="{{url_for('static', filename='btn_group.js')}}"></script>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/ranking.css') }}">
+	<script src="{{url_for('static', filename='js/btn_group.js')}}"></script>
 
 {% endblock %}

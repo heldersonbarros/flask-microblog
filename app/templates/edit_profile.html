@@ -10,7 +10,7 @@
 	<form action="" method="POST" enctype="multipart/form-data" novalidate>
 	  {{form.hidden_tag()}}
 	  <div>
-		<img src="{{url_for('avatars_profile', user_id=current_user.id)}}" class="rounded-circle" alt="Erro em carregar imagem" style="display: block;height: auto;max-width: 40%;margin:0 auto;" height="150px">
+		<img src="{{url_for('core.avatars_profile', user_id=current_user.id)}}" class="rounded-circle" alt="Erro em carregar imagem" style="display: block;height: auto;max-width: 40%;margin:0 auto;" height="150px">
 	  </div>
 	  <div class="form-group mt-3">
 		<div class="custom-file">

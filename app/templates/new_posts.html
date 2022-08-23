@@ -12,13 +12,13 @@
 		<div class="float-right d-inline-block col-md-4">
 			{% for post in posts %}
 				<div class="py-1">
-				<a href="{{url_for('post', id=post.id)}}">
-					<img height="200x" width="300px" src="{{ url_for('uploads', post_id=post.id)}}"><br>
+				<a href="{{url_for('core.post', id=post.id)}}">
+					<img height="200x" width="300px" src="{{ url_for('core.uploads', post_id=post.id)}}"><br>
 					<span class="text-dark my-2"><b>{{post.title}}</b></span>
 				</a>
 			</div>
 			{% endfor %}
-			<a class="btn btn-light text-danger text-center border w-100" href="{{url_for('tops')}}">
+			<a class="btn btn-light text-danger text-center border w-100" href="{{url_for('core.tops')}}">
 				<b>Mais posts</b></a>
 		</div>
 		

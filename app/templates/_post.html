@@ -1,10 +1,10 @@
-<h1 style="font-size:larger ;"><a class="text-dark" href="{{ url_for('post', id=post.id) }}">{{post.title}}</a></h1><br>
-<a href="{{url_for('post', id=post.id)}}"><img src="{{ url_for('uploads', post_id=post.id)}}" alt="Imagem não encontrada" 
+<h1 style="font-size:larger ;"><a class="text-dark" href="{{ url_for('core.post', id=post.id) }}">{{post.title}}</a></h1><br>
+<a href="{{url_for('core.post', id=post.id)}}"><img src="{{ url_for('core.uploads', post_id=post.id)}}" alt="Imagem não encontrada" 
     style="max-width:600px;width:100%"></a><br>
 
 <div class="mt-1 mb-3">
 <span class="user_popover">
-    <a class="text-danger" href="{{ url_for('user', username=post.author.username) }}">
+    <a class="text-danger" href="{{ url_for('core.user', username=post.author.username) }}">
         {{ post.author.username }}
     </a>
 </span>
@@ -32,7 +32,7 @@
                     <i class="far fa-frown fa-lg"></i> 0
                 </button>
 
-                <a href="{{url_for('post', id=post.id)}}#comments">
+                <a href="{{url_for('core.post', id=post.id)}}#comments">
                 <button type="button" class="btn btn-light border bg-white rounded">
                     <i class="fa fa-comment fa-lg" aria-hidden="true"></i>
                     {{post.comments.count()}} Comentários

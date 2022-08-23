@@ -4,10 +4,10 @@
     <h2 class="mb-3">Meus comentários</h2>
     <div class="list-group">
     {% for comment in comments %}
-        <a href="{{url_for('post', id=comment.post_id)}}#comment{{comment.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <a href="{{url_for('core.post', id=comment.post_id)}}#comment{{comment.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
                     <div>
-                    <img src="{{url_for('avatars_profile', user_id=comment.author.id)}}" class="rounded-circle " alt="Erro em carregar imagem" height="50px">
+                    <img src="{{url_for('core.avatars_profile', user_id=comment.author.id)}}" class="rounded-circle " alt="Erro em carregar imagem" height="50px">
                     </div>
                     <div class="col-md-10 mt-2">
                         <b>{{ comment.author.username }}</b> ° <span class="text-muted">{{moment(comment.timestamp).calendar()}}</span>
@@ -18,7 +18,7 @@
                     <br>
                 <p class="mb-1"></p>
                 <small>
-                    <img src="{{url_for('uploads', post_id=comment.post_id)}}" alt="Erro em carregar imagem" height="50px">
+                    <img src="{{url_for('core.uploads', post_id=comment.post_id)}}" alt="Erro em carregar imagem" height="50px">
                 </small>
             </div>
         </a>
